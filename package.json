@@ -13,5 +13,9 @@
     "@babel/plugin-transform-runtime": "^7.19.1",
     "@babel/preset-env": "^7.19.1",
     "@babel/register": "^7.18.9"
+  },
+  "dependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0"
   }
 }
