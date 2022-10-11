@@ -1,14 +1,14 @@
-import supertest from 'supertest'
 import {expect} from 'chai'
+import AuthHelper from '../helpers/auth.helper'
 
 describe('Authentication', function () {
+  const authHelper = new AuthHelper()
+
   describe('Log in with valid credentials', function () {
     let response
 
     before(async function () {
-      response = await supertest(process.env.BASE_URL)
-        .post('/auth')
-        .send({login: process.env.LOGIN, password: process.env.PASSWORD})
+      response = await authHelper.logIn(process.env.LOGIN, process.env.PASSWORD)
     })
 
     it('Response status code is 200', function () {
@@ -24,9 +24,7 @@ describe('Authentication', function () {
     let response
 
     before(async function () {
-      response = await supertest(process.env.BASE_URL)
-        .post('/auth')
-        .send({login: 'invalid', password: 'invalid'})
+      response = await authHelper.logIn('invalid', 'invalid')
     })
 
     it('Response status code is 404', function () {
