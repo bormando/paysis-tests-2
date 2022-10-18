@@ -17,4 +17,11 @@ export default class UserHelper {
       .send({id})
     return this.result
   }
+
+  async get(id = '') {
+    this.result = await supertest(process.env.BASE_URL)
+      .get(`/users${id === '' ? '' : `?id=${id}`}`)
+      .set('Authorization', `Bearer ${process.env.TOKEN}`)
+    return this.result
+  }
 }
