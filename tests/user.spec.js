@@ -28,20 +28,39 @@ describe('User', function () {
   })
 
   describe('Delete', function () {
-    let response
-    const userHelper = new UserHelper()
+    describe('With existing User ID', function () {
+      let response
+      const userHelper = new UserHelper()
 
-    before(async function () {
-      const userId = (await userHelper.create()).body.id
-      response = await userHelper.delete(userId)
+      before(async function () {
+        const userId = (await userHelper.create()).body.id
+        response = await userHelper.delete(userId)
+      })
+
+      it('Response status code is 200', function () {
+        expect(response.statusCode).to.eq(200)
+      })
+
+      it('Response body contains success message', function () {
+        expect(response.body.message).to.eq('User deleted.')
+      })
     })
 
-    it('Response status code is 200', function () {
-      expect(response.statusCode).to.eq(200)
-    })
+    describe('With non-existing User ID', function () {
+      let response
+      const userHelper = new UserHelper()
 
-    it('Response body contains success message', function () {
-      expect(response.body.message).to.eq('User deleted.')
+      before(async function () {
+        response = await userHelper.delete('abracadabra')
+      })
+
+      it('Response status code is 400', function () {
+        expect(response.statusCode).to.eq(400)
+      })
+
+      it('Response body contains error message', function () {
+        expect(response.body.message).to.eq('No user found.')
+      })
     })
   })
 
@@ -81,6 +100,33 @@ describe('User', function () {
         for (let user of response.body) {
           expect(user.amount).to.be.a('number')
         }
+      })
+    })
+
+    describe('Single user', function () {
+      const userHelper = new UserHelper()
+      let response
+      let userId
+
+      before(async function () {
+        userId = (await userHelper.create()).body.id
+        response = await userHelper.get(userId)
+      })
+
+      after(async function () {
+        await userHelper.delete(userId)
+      })
+
+      it('Response status code is 200', function () {
+        expect(response.statusCode).to.eq(200)
+      })
+
+      it('Response body contains User ID', function () {
+        expect(response.body.id).to.eq(userId)
+      })
+
+      it('Response body contains amount', function () {
+        expect(response.body.amount).to.be.a('number')
       })
     })
   })
