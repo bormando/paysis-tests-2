@@ -1,6 +1,6 @@
 import UserHelper from '../helpers/user.helper'
 import TransactionHelper from '../helpers/transaction.helper'
-import {expect} from "chai";
+import {expect} from 'chai'
 
 describe('Transaction', function () {
   const defaultBalance = 1000
@@ -45,14 +45,14 @@ describe('Transaction', function () {
         expect(createTransactionResponse.body.amount).to.eq(amount)
       })
 
-      it('Sender\'s balance had decreased by 100', async function () {
+      it("Sender's balance had decreased by 100", async function () {
         const response = await userHelper.get(userIdFrom)
-        await expect(response.body.amount).to.eq(defaultBalance-amount)
+        await expect(response.body.amount).to.eq(defaultBalance - amount)
       })
 
-      it('Receiver\'s balance has increased by 100', async function () {
+      it("Receiver's balance has increased by 100", async function () {
         const response = await userHelper.get(userIdTo)
-        await expect(response.body.amount).to.eq(defaultBalance+amount)
+        await expect(response.body.amount).to.eq(defaultBalance + amount)
       })
     })
   })
