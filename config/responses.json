@@ -1,0 +1,46 @@
+{
+  "auth": {
+    "valid": {
+      "token": "29ab1179-b13c-45ca-a25a-ada34847b825"
+    },
+    "incorrect": {
+      "message": "Wrong login or password."
+    }
+  },
+  "users": {
+    "create": {
+      "id": "d27c513c-be3c-43ad-a92a-450fed274746",
+      "amount": 1000
+    },
+    "delete": {
+      "existing": {
+        "message": "User deleted."
+      },
+      "nonExisting": {
+        "message": "No user found."
+      }
+    },
+    "get": {
+      "all": [
+        {
+          "id": "d27c513c-be3c-43ad-a92a-450fed274741",
+          "amount": 1000
+        },
+        {
+          "id": "d27c513c-be3c-43ad-a92a-450fed274742",
+          "amount": 1000
+        }
+      ]
+    }
+  },
+  "transactions": {
+    "create": {
+      "invalid": {
+        "message": "Amount must be above zero."
+      }
+    }
+  },
+  "config": {
+
+  }
+}
